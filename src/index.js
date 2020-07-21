@@ -30,16 +30,19 @@ class Redsight extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('@@@', this.state)
+        console.log('@@@', {...this.state, iID: this.intervalID})
         if(this.state.mode === 'flash' && !this.intervalID)
             this.intervalID = setInterval(this.toggleBulb.bind(this), this.state.flash_interval)
         
-        if(this.state.mode === 'default' && this.intervalID)
+        if(this.state.mode === 'default' && this.intervalID)    {
             clearInterval(this.intervalID)
+            this.intervalID = null
+        }
     }
 
     componentWillUnmount() {
         clearInterval(this.intervalID)
+        this.intervalID = null
     }
 
     render() {
