@@ -1,17 +1,58 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+
+class Redsight extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mode: 'default',
+            bulb: true,
+            flash_interval: 3000
+        }
+
+        this.toggleFlash = this.toggleFlash.bind(this)
+    }
+
+    toggleBulb() {
+        const currState = this.state.bulb
+        this.setState({ bulb: !currState})
+    }
+
+    toggleFlash() {
+        this.setState({
+            mode: this.state.mode === 'default' ? 'flash' : 'default'
+        })
+    }
+
+    componentDidMount() {
+        
+    }
+
+    componentDidUpdate() {
+        console.log('@@@', this.state)
+        if(this.state.mode === 'flash' && !this.intervalID)
+            this.intervalID = setInterval(this.toggleBulb.bind(this), this.state.flash_interval)
+        
+        if(this.state.mode === 'default' && this.intervalID)
+            clearInterval(this.intervalID)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalID)
+    }
+
+    render() {
+        return (
+            <div
+                className={this.state.bulb ? "redsight" : "offsight"}
+                onClick={this.toggleFlash}
+            />
+        )
+    }
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Redsight />,
+    document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
