@@ -43,7 +43,7 @@ class Redsight extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('@@@', {...this.state, iID: this.intervalID})
+        //console.log('@@@', {...this.state, iID: this.intervalID})
         const {bulb, mode, flash_interval, off_interval} = this.state
         if(mode === 'flash') {
             if(bulb)
