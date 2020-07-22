@@ -4,7 +4,7 @@ import './index.css'
 import 'fontsource-roboto'
 import HighlightIcon from '@material-ui/icons/Highlight'
 import TonalityIcon from '@material-ui/icons/Tonality';
-import { IconButton, AppBar, ButtonGroup } from '@material-ui/core'
+import { IconButton, ButtonGroup } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
@@ -71,10 +71,10 @@ class Redsight extends React.Component {
                 />
                 <ThemeProvider theme={theme}>
                     <ButtonGroup orientation='vertical'>
-                        <IconButton className="flash" aria-label="flash" color='primary'>
-                            <HighlightIcon fontSize='large' onClick={this.toggleFlash}/>
+                        <IconButton aria-label="flash" color='primary' onClick={this.toggleFlash}>
+                            <HighlightIcon fontSize='large'/>
                         </IconButton>
-                        <IconButton className="flash" aria-label="gradient" color='primary'>
+                        <IconButton aria-label="gradient" color='primary'>
                             <TonalityIcon fontSize='large' />
                         </IconButton>
                     </ButtonGroup>
